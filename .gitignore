@@ -1,4 +1,4 @@
-node_modules/
 blog_posts/
+node_modules/
 .cache/
 public

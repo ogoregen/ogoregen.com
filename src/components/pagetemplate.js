@@ -1,35 +1,30 @@
 
 import * as React from "react"
-import {Link, useStaticQuery, graphql} from "gatsby"
-import Navigation from "./navigation"
+import Header from "./header"
+import Footer from "./footer"
 
 import "../style/style.css"
 
-const PageTemplate = ({title, children}) => {
-
-    const data = useStaticQuery(graphql`    
-        query{
-            site{
-                siteMetadata{
-                    title
-                }
-            }
-        }
-    `)
+const PageTemplate = ({title, subtitle, children}) => {
 
     return(
-        <div class="fly-container">
-            <div class="fly-content-wrapper">
-                <div>
-                    <Navigation/>
-                    <h1>{title}</h1>
-                    {children}
-                </div>
-                <footer class="fly-border-top fly-margin fly-margin-small-bottom">
-                    <p class="fly-text-center fly-margin-0-bottom">&copy; 2023 flighty</p>
-                </footer>
+        <>
+        <div className="fly-container" style={{zIndex: 1, position: "relative"}}>
+            <div>
+                <Header/>
+                <main className="fly-width-2-3 fly-margin-horizontal-auto">
+                    <div className="fly-text-center">
+                        <h1 className="fly-margin-small-bottom">{title}</h1>
+                        {subtitle ? <span className="fly-text-muted">{subtitle}</span> : null}
+                    </div>
+                    <div className="fly-margin-large-top">
+                        {children}
+                    </div>
+                </main>
             </div>
-        </div>
+            </div>
+            <Footer/>
+        </>
     )
 }
 

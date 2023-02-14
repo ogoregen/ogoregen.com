@@ -9,8 +9,9 @@ export const query = graphql`
             nodes {
                 frontmatter{
                     title
-                    date(formatString: "MMMM D, YYYY")
+                    date(formatString: "MMM. D, YYYY")
                     slug
+                    description
                 }
                 id
             }
@@ -22,16 +23,17 @@ const Blog = ({data}) => {
 
     return(
         <PageTemplate title="Blog">
-            <ul>
-                {
+            {
                 data.allMdx.nodes.map(node => (
-                    <li key={node.id}>
-                        <Link to={`/blog/${node.frontmatter.slug}`}>{node.frontmatter.title}</Link>
-                        <p>{node.frontmatter.date}</p>
-                    </li>
+                    <div className="fly-flex fly-flex-space-between fly-margin-bottom" key={node.id}>
+                        <div>
+                            <Link to={`/blog/${node.frontmatter.slug}`} className="fly-text-lead">{node.frontmatter.title}</Link>
+                            <p className="fly-margin-none-top">{node.frontmatter.description}</p>
+                        </div>
+                        <p className="fly-margin-none-top fly-mobile-only">{node.frontmatter.date}</p>
+                    </div>
                 ))
-                }
-            </ul>
+            }
         </PageTemplate>
     )
 }
